@@ -63,17 +63,15 @@ var people = [
 
 var counter = 0;
 var outputEl = document.getElementById("output");
-for (; counter < 5; counter++) {
-  // Give each person element a unique identifier
-  outputEl.innerHTML += `<div class="person__container" id="person--${counter}"></div>`;
+
+for (; counter < 6; counter++) {
+  outputEl.innerHTML += `<div class="people__container" id="people--${counter}"><header>${people[counter].name}: ${people[counter].title}</header><section>${people[counter].bio}<img src="${people[counter].image}"></section><footer>${people[counter].lifespan.birth} to ${people[counter].lifespan.death}</footer></div>`;
 }
 
-// Now containerEl will have elements in it
-var containerEl = document.getElementsByClassName("person__container");
+var containerEl = document.getElementsByClassName("people__container");
 
-// Event listeners are created
 for (var i = 0; i < containerEl.length; i++) {
   containerEl[i].addEventListener("click", function (event) {
-    // Logic to execute when the element is clicked
+    
   });
 };

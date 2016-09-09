@@ -1,0 +1,10 @@
+img {
+	height: 25%;
+	width: 25%;
+}
+.people__container{
+	background-color: lightblue;
+}
+.people__container:nth-child(even) {
+	background-color: lightyellow;
+}
