@@ -1,10 +1,23 @@
-img {
-	height: 25%;
-	width: 25%;
+body {
+	margin: 0 auto;
 }
+img {
+	height: 100%;
+	width: 100%;
+}
+
 .people__container{
 	background-color: lightblue;
+	border-radius: 20px;
+	padding: 5px;
+	width: 400px;
+	margin: 0 auto;
+
 }
 .people__container:nth-child(even) {
-	background-color: lightyellow;
+	background-color: #FFD833;	
+}
+
+.people__container header, footer {
+	font-size: 1.5em;
 }
