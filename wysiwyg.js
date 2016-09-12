@@ -60,33 +60,55 @@ var people = [
   }
 }
 ]
-
 var userInput = document.getElementById("input");
 var outputEl = document.getElementById("output");
-var peopleContainer = document.getElementsByClassName("people__container");
-var counter = 0;
+var pC = document.getElementsByClassName("people__container");
+var userInputOutput = document.getElementById("userOutput");
+var cnt = 0;
 
-for (; counter < 6; counter++) {
-  outputEl.innerHTML += `<div class="people__container" id="people--${counter}"><header>${people[counter].name}: ${people[counter].title}</header><section>Bio: ${people[counter].bio}</section><img src="${people[counter].image}"><footer>lifespan: ${people[counter].lifespan.birth} to ${people[counter].lifespan.death}</footer><input id="input" type="text" value="Add to bio"></div>`;
+for (; cnt < 6; cnt++) {
+  var peopleObjects = `<header>${people[cnt].name}: `;
+  peopleObjects += `${people[cnt].title}</header>`;
+  peopleObjects += `<section>Bio: ${people[cnt].bio}</section>`;
+  peopleObjects += `<img src="${people[cnt].image}">`;
+  peopleObjects += `<footer>lifespan: ${people[cnt].lifespan.birth} to `;
+  peopleObjects += `${people[cnt].lifespan.death}</footer>`;
+  peopleObjects += `<input id="input" type="text" value="Add to bio">`;
+  outputEl.innerHTML += `<div class="people__container" id="people--${cnt}">${peopleObjects}</div>`;
+
 }
-for (var i = 0; i < peopleContainer.length; i++) {
+// When you click on one of the person elements, a dotted border should appear around it.
+for (var i = 0; i < pC.length; i++) {
   var pC = document.getElementsByClassName("people__container");
-    for (var i = 0; i < pC.length; i++) {
-      pC[i].addEventListener("click", function (event) {
-        console.log(event.target);
-        event.target.parentElement.style.border = "5px dotted black";  
-      });
-    }
+  for (var i = 0; i < pC.length; i++) {
+    pC[i].addEventListener("click", function (event) {
+      event.target.parentElement.style.border = "5px dotted black"; 
+    });
+  }
 };
+// When you click on one of the person elements, the text input should immediately gain focus so that you can start typing.
+var userInput = document.getElementById("input");
+userInput.addEventListener("focus", function (event) {
+        if(userInput.value === "Add to bio"){
+          userInput.value = "";
+          event.target.style.background = "lightgreen";
+        };
+      }); 
+userInput.addEventListener("blur", function (event) {
+        if(userInput.value === ""){
+          userInput.value = "Add to bio";
+          event.target.style.background = "white";
+        };
+      });       
+// When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
+var uI = userInput.value;
+userInputOutput.innerHTML += `<div>inside</div>`; 
 
+
+// When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
 function enterKeyPressed(keypress){
   if (keypress.which === 13) {
-    //();
-    //.value = "";
+    userInput.value = "";
   }
 }
 document.addEventListener("keypress", enterKeyPressed);
-
-// When you click on one of the person elements, the text input should immediately gain focus so that you can start typing.
-// When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
-// When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
