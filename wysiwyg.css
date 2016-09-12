@@ -2,7 +2,7 @@ body {
 	margin: 0 auto;
 }
 img {
-	height: 100%;
+	/*height: 100%;*/
 	width: 100%;
 }
 
@@ -12,8 +12,11 @@ img {
 	padding: 5px;
 	width: 400px;
 	margin: 0 auto;
-
+	display: inline-block;
 }
+
+/*For every even numbered element, have a light yellow background.
+For every odd numbered element, have a light blue background.*/
 .people__container:nth-child(even) {
 	background-color: #FFD833;	
 }
