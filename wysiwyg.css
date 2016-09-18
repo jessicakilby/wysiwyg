@@ -1,16 +1,27 @@
-body {
-	margin: 0 auto;
-}
 img {
 	/*height: 100%;*/
 	width: 100%;
+}
+#topHeader h3 {
+	padding-top: 0px;
+	margin-top: 0px;
+}
+#topHeader {
+	width: 100%;
+	background-color: teal;
+}
+.input {
+	margin: 20px;
+	border: 2px solid green;
+	width: 70%;
+	height: 40px;
 }
 
 .people__container{
 	background-color: lightblue;
 	border-radius: 20px;
 	padding: 5px;
-	width: 400px;
+	width: 200px;
 	margin: 0 auto;
 	display: inline-block;
 }

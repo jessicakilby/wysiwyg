@@ -59,11 +59,12 @@ var people = [
     death: 1852
   }
 }
-]
-var userInput = document.getElementById("input");
+];
+var userInput = document.getElementsByClassName("input");
+var inputTag = document.getElementsByTagName("input")
 var outputEl = document.getElementById("output");
 var pC = document.getElementsByClassName("people__container");
-var userInputOutput = document.getElementById("userOutput");
+var outputText = document.getElementById("userOutput");
 var cnt = 0;
 
 for (; cnt < 6; cnt++) {
@@ -73,36 +74,36 @@ for (; cnt < 6; cnt++) {
   peopleObjects += `<img src="${people[cnt].image}">`;
   peopleObjects += `<footer>lifespan: ${people[cnt].lifespan.birth} to `;
   peopleObjects += `${people[cnt].lifespan.death}</footer>`;
-  peopleObjects += `<input id="input" type="text" value="Add to bio">`;
   outputEl.innerHTML += `<div class="people__container" id="people--${cnt}">${peopleObjects}</div>`;
-
+  userInputFocusBlur();
 }
-// When you click on one of the person elements, a dotted border should appear around it.
-for (var i = 0; i < pC.length; i++) {
-  var pC = document.getElementsByClassName("people__container");
+
+function userInputFocusBlur(){
   for (var i = 0; i < pC.length; i++) {
     pC[i].addEventListener("click", function (event) {
-      event.target.parentElement.style.border = "5px dotted black"; 
+      event.target.parentElement.style.border = "5px dotted black";
+    });
+    // removeEvent(pC, "click");
+  }
+  for(var i = 0; i < inputTag.length; i++){
+    inputTag[i].addEventListener("focus", function (event) {
+      event.target.style.background = "lightgreen";
+      if(event.target.value === "Add to selected bio"){
+        event.target.value = "";
+      };
+    });
+    userInput[i].addEventListener("blur", function (event) {
+      event.target.style.background = "white";
+      if(event.target.value === ""){
+        event.target.value = "Add to selected bio";
+      };
     });
   }
-};
-// When you click on one of the person elements, the text input should immediately gain focus so that you can start typing.
-var userInput = document.getElementById("input");
-userInput.addEventListener("focus", function (event) {
-        if(userInput.value === "Add to bio"){
-          userInput.value = "";
-          event.target.style.background = "lightgreen";
-        };
-      }); 
-userInput.addEventListener("blur", function (event) {
-        if(userInput.value === ""){
-          userInput.value = "Add to bio";
-          event.target.style.background = "white";
-        };
-      });       
+}  
+       
 // When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
-var uI = userInput.value;
-userInputOutput.innerHTML += `<div>inside</div>`; 
+// var uI = userInput.value;
+outputText.innerHTML += `<div>inside</div>`; 
 
 
 // When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
