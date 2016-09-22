@@ -2,7 +2,7 @@ var people = [
 {
   title: "Chemist",
   name: "Rosalind Franklin",
-  bio: "English chemist and X-ray crystallographer who made contributions to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite.",
+  bio: "hemist and X-ray crystallographer, contributed to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite.",
   image: "img/Rosalind_Franklin.jpg",
   lifespan: {
     birth: 1920,
@@ -60,8 +60,7 @@ var people = [
   }
 }
 ];
-var userInput = document.getElementsByClassName("input");
-var inputTag = document.getElementsByTagName("input")
+var userInput = document.getElementById("input");
 var outputEl = document.getElementById("output");
 var pC = document.getElementsByClassName("people__container");
 var outputText = document.getElementById("userOutput");
@@ -70,40 +69,40 @@ var cnt = 0;
 for (; cnt < 6; cnt++) {
   var peopleObjects = `<header>${people[cnt].name}: `;
   peopleObjects += `${people[cnt].title}</header>`;
-  peopleObjects += `<section>Bio: ${people[cnt].bio}</section>`;
+  peopleObjects += `<section id="bio">Bio: ${people[cnt].bio}</section>`;
   peopleObjects += `<img src="${people[cnt].image}">`;
   peopleObjects += `<footer>lifespan: ${people[cnt].lifespan.birth} to `;
   peopleObjects += `${people[cnt].lifespan.death}</footer>`;
-  outputEl.innerHTML += `<div class="people__container" id="people--${cnt}">${peopleObjects}</div>`;
-  userInputFocusBlur();
+  outputEl.innerHTML += `<div class="people__container col-xs-6 col-sm-4" id="people--${cnt}">${peopleObjects}</div>`;
+  userInputListener();
 }
 
-function userInputFocusBlur(){
+function userInputListener(){
   for (var i = 0; i < pC.length; i++) {
     pC[i].addEventListener("click", function (event) {
-      event.target.parentElement.style.border = "5px dotted black";
-    });
-    // removeEvent(pC, "click");
-  }
-  for(var i = 0; i < inputTag.length; i++){
-    inputTag[i].addEventListener("focus", function (event) {
-      event.target.style.background = "lightgreen";
-      if(event.target.value === "Add to selected bio"){
-        event.target.value = "";
-      };
-    });
-    userInput[i].addEventListener("blur", function (event) {
-      event.target.style.background = "white";
-      if(event.target.value === ""){
-        event.target.value = "Add to selected bio";
-      };
+      event.target.parentElement.classList.toggle("border");
+
+      userInput.style.background = "lightgreen";
+      if(userInput.value === "Add to selected bio"){
+        userInput.value = "";
+      userInput.onkeyup = function() {
+        var bioText = document.getElementById("bio");
+        bioText.innerHTML = userInput.value;
+        console.log("bioText", bioText);
+      }
+      } 
+
+
+      else if (userInput.value === ""){
+        userInput.style.background = "white";
+        userInput.value = "Add to selected bio";
+        }; 
     });
   }
 }  
        
 // When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
 // var uI = userInput.value;
-outputText.innerHTML += `<div>inside</div>`; 
 
 
 // When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
