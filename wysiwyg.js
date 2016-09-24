@@ -2,7 +2,7 @@ var people = [
 {
   title: "Chemist",
   name: "Rosalind Franklin",
-  bio: "hemist and X-ray crystallographer, contributed to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite.",
+  bio: "Chemist and X-ray crystallographer, contributed to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite.",
   image: "img/Rosalind_Franklin.jpg",
   lifespan: {
     birth: 1920,
@@ -69,11 +69,11 @@ var cnt = 0;
 for (; cnt < 6; cnt++) {
   var peopleObjects = `<header>${people[cnt].name}: `;
   peopleObjects += `${people[cnt].title}</header>`;
-  peopleObjects += `<section id="bio">Bio: ${people[cnt].bio}</section>`;
+  peopleObjects += `<section class="bio">Bio: ${people[cnt].bio}</section>`;
   peopleObjects += `<img src="${people[cnt].image}">`;
   peopleObjects += `<footer>lifespan: ${people[cnt].lifespan.birth} to `;
   peopleObjects += `${people[cnt].lifespan.death}</footer>`;
-  outputEl.innerHTML += `<div class="people__container col-xs-6 col-sm-4" id="people--${cnt}">${peopleObjects}</div>`;
+  outputEl.innerHTML += `<div class="people__container col-xs-6 col-sm-4">${peopleObjects}</div>`;
   userInputListener();
 }
 
@@ -81,31 +81,31 @@ function userInputListener(){
   for (var i = 0; i < pC.length; i++) {
     pC[i].addEventListener("click", function (event) {
       event.target.parentElement.classList.toggle("border");
-
       userInput.style.background = "lightgreen";
       if(userInput.value === "Add to selected bio"){
         userInput.value = "";
-      userInput.onkeyup = function() {
-        var bioText = document.getElementById("bio");
-        bioText.innerHTML = userInput.value;
-        console.log("bioText", bioText);
-      }
+        userInput.addEventListener("keyup", keyupBio);
       } 
-
-
       else if (userInput.value === ""){
         userInput.style.background = "white";
         userInput.value = "Add to selected bio";
-        }; 
+      }; 
     });
   }
 }  
-       
-// When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
-// var uI = userInput.value;
 
+function keyupBio(event) {
+  event.preventDefault();
+  console.log("event target", event.target);
+  var bioText = document.getElementsByClassName("bio");
+  console.log("this", this);
+  console.log("bioText", bioText);
+  for (var j = 0; j < bioText.length; j++) {
+    bioText[j].innerHTML = userInput.value;
+    console.log("bioText", bioText[j]);
+  }
+}
 
-// When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
 function enterKeyPressed(keypress){
   if (keypress.which === 13) {
     userInput.value = "";
