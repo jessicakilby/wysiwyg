@@ -77,34 +77,28 @@ for (; cnt < 6; cnt++) {
   userInputListener();
 }
 
+var bioSection;
 function userInputListener(){
   for (var i = 0; i < pC.length; i++) {
     pC[i].addEventListener("click", function (event) {
-      event.target.parentElement.classList.toggle("border");
+      var bioSection = this.childNodes[1];
+      bioSection.parentElement.classList.toggle("border");
       userInput.style.background = "lightgreen";
       if(userInput.value === "Add to selected bio"){
         userInput.value = "";
-        userInput.addEventListener("keyup", keyupBio);
       } 
       else if (userInput.value === ""){
         userInput.style.background = "white";
         userInput.value = "Add to selected bio";
       }; 
+      userInput.addEventListener("keyup", function(){
+        for (var j = 0; j < 6; j++) {
+        bioSection.innerHTML = userInput.value;
+        }
+      });
     });
   }
 }  
-
-function keyupBio(event) {
-  event.preventDefault();
-  console.log("event target", event.target);
-  var bioText = document.getElementsByClassName("bio");
-  console.log("this", this);
-  console.log("bioText", bioText);
-  for (var j = 0; j < bioText.length; j++) {
-    bioText[j].innerHTML = userInput.value;
-    console.log("bioText", bioText[j]);
-  }
-}
 
 function enterKeyPressed(keypress){
   if (keypress.which === 13) {
